@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>充电效果</title>
+		<link rel="stylesheet/less" type="text/css" href="./less/battery1.less">
+		<link rel="stylesheet/less" type="text/css" href="./less/battery2.less">
+	</head>
+	<style type="text/css">
+		body {
+			display: flex;
+			justify-content: space-between;
+		}
+	</style>
+	<body>
+		<div class="battery1-outer">
+			<div id="battery1">
+				<div class="battery-anode"></div>
+				<div class="battery-body">
+					<div class="wave"></div>
+					<div class="wave" style="transform: rotate(90deg); opacity: 0.7;"></div>
+					<div class="wave" style="transform: rotate(45deg); opacity: 0.9;"></div>
+					<div class="charge"></div>
+				</div>
+			</div>
+		</div>
+		<div class="battery2-outer">
+			<div class="battery-container">
+				<div class="big-circle">98.7%</div>
+				<div class="circle-container">
+					<div class="decoration"></div>
+					<div class="bottom"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.bootcss.com/less.js/3.10.3/less.min.js"></script>
+	<script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+	<script src="./js/battery2.js"></script>
+</html>
