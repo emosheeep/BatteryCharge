@@ -1,3 +1,8 @@
+import '../less/common.less'
+import '../less/battery1.less'
+import '../less/battery2.less'
+import Animate from 'velocity-animate'
+
 const random  = function (min, max, floor) {
 	let num = min + Math.random() * (max - min)
 	if (floor) {
@@ -9,14 +14,13 @@ const random  = function (min, max, floor) {
 
 const scale = 150
 class Circle {
+	static width = scale // 画布宽度
+	static height = scale * 4/3 // 小球移动的最大高度
+	static range = scale / 4 // 左右留下的间距
 	constructor () {
-		this.width = scale // 画布宽度
-		this.height = scale * 4/3 // 小球移动的最大高度
-		this.range = scale / 4 // 左右留下的间距
-		
 		this.init()
 	}
-	create (x, radius) {
+	static create (x, radius) {
 		let c = document.createElement('div')
 		c.style.width = radius + 'px'
 		c.style.height = radius + 'px'
@@ -28,14 +32,14 @@ class Circle {
 	init () {
 		this.radius = random(15, 30)
 		this.vy = random(1500, 3000, true) // 用时间衡量速度
-		this.x = random(this.range, this.width - this.range) // x初始横坐标位置
-		this.dom = this.create(this.x, this.radius)
+		this.x = random(Circle.range, Circle.width - Circle.range) // x初始横坐标位置
+		this.dom = Circle.create(this.x, this.radius)
 	}
 }
 class Run {
 	constructor() {
 		this.container = document.querySelector('.circle-container')
-		
+
 		this.circles = this.createCircle(10)
 		this.run()
 	}
@@ -48,8 +52,8 @@ class Run {
 	}
 	animation (circle) {
 		this.container.appendChild(circle.dom)
-		return circle.dom.velocity({
-			bottom: circle.height + 'px'
+		return Animate(circle.dom, {
+			bottom: Circle.height + 'px'
 		}, {
 			duration: circle.vy,
 			complete: () => {
