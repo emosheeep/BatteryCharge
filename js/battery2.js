@@ -12,20 +12,16 @@ const random  = function (min, max, floor) {
 	}
 }
 
-const scale = 150
 class Circle {
-	static width = scale // 画布宽度
-	static height = scale * 4/3 // 小球移动的最大高度
-	static range = scale / 4 // 左右留下的间距
 	constructor () {
 		this.init()
 	}
-	static create (x, radius) {
+	create () {
 		let c = document.createElement('div')
-		c.style.width = radius + 'px'
-		c.style.height = radius + 'px'
-		c.style.borderRadius = radius + 'px'
-		c.style.left = x - radius / 2 + 'px' // 中心点
+		c.style.width = this.radius + 'px'
+		c.style.height = this.radius + 'px'
+		c.style.borderRadius = this.radius + 'px'
+		c.style.left = this.x - this.radius / 2 + 'px' // 中心点
 		c.classList.add('circles')
 		return c
 	}
@@ -33,12 +29,17 @@ class Circle {
 		this.radius = random(15, 30)
 		this.vy = random(1500, 3000, true) // 用时间衡量速度
 		this.x = random(Circle.range, Circle.width - Circle.range) // x初始横坐标位置
-		this.dom = Circle.create(this.x, this.radius)
+		this.dom = this.create()
 	}
 }
+
 class Run {
 	constructor() {
 		this.container = document.querySelector('.circle-container')
+		// 设置静态量，描述小球画布范围
+		Circle.width = this.container.offsetWidth // 画布宽度
+		Circle.height = this.container.offsetHeight // 小球移动的最大高度
+		Circle.range = Circle.width / 4 // 左右留下的间距
 
 		this.circles = this.createCircle(10)
 		this.run()
