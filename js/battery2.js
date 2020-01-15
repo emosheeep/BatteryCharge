@@ -17,11 +17,13 @@ class Circle {
 		this.init()
 	}
 	create () {
-		let c = document.createElement('div')
+		let c = this.dom || document.createElement('div')
+		c.remove() // 在文档中则移除，不在就什么都没发生
 		c.style.width = this.radius + 'px'
 		c.style.height = this.radius + 'px'
 		c.style.borderRadius = this.radius + 'px'
 		c.style.left = this.x - this.radius / 2 + 'px' // 中心点
+		c.style.bottom = '12px' // 留一点空隙，动画更自然
 		c.classList.add('circles')
 		return c
 	}
