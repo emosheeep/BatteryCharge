@@ -12,11 +12,12 @@ class Circle {
 		this.init()
 	}
 	create () {
-		let c = document.createElement('div')
+		let c = this.dom || document.createElement('div')
 		c.style.width = this.radius + 'px'
 		c.style.height = this.radius + 'px'
 		c.style.borderRadius = this.radius + 'px'
 		c.style.left = this.x - this.radius / 2 + 'px' // 中心点
+		c.style.bottom = '12px'
 		c.classList.add('circles')
 		return c
 	}
@@ -48,7 +49,7 @@ class Run {
 	}
 	animation (circle) {
 		this.container.appendChild(circle.dom)
-		return Animate(circle.dom, {
+		$(circle.dom).animate({
 			bottom: Circle.height + 'px'
 		}, {
 			duration: circle.vy,
